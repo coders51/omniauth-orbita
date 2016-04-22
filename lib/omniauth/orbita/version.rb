@@ -1,5 +1,5 @@
 module OmniAuth
-  module Oauth51
+  module Orbita
     VERSION = '2.0.0'
   end
 end

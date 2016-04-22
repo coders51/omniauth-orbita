@@ -2,11 +2,11 @@ require 'omniauth-oauth2'
 
 module OmniAuth
   module Strategies
-    class Oauth51 < OmniAuth::Strategies::OAuth2
-      option :name, :oauth51
+    class Orbita < OmniAuth::Strategies::OAuth2
+      option :name, :orbita
 
       option :client_options, {
-        site: 'https://www.oauth51.com',
+        site: 'http://connect.getorbita.io',
         authorize_url: '/oauth/authorize'
       }
 

@@ -1,13 +1,13 @@
-# Oauth51
+# Orbita
 
-This gem implementation the OmniAuth strategy for the Oauth51
+This gem implementation the OmniAuth strategy for the Orbita
 
-Alongside with this gem, you should use also [oauth51-client](https://github.com/coders51/oauth51-client/) gem which provides an interface with Oauth51 API.
+Alongside with this gem, you should use also [oauth51-client](https://github.com/coders51/oauth51-client/) gem which provides an interface with Orbita API.
 
 For the login process, add this gem to your `Gemfile`:
 
 ```ruby
-gem 'omniauth-oauth51', github: 'coders51/omniauth-oauth51.git'
+gem 'omniauth-orbita', github: 'coders51/omniauth-orbita.git'
 gem 'oauth51-client', github: 'coders51/oauth51-client.git'
 ```
 
@@ -15,7 +15,7 @@ Then you should simply follow the [Oauth instruction for devise](https://github.
 
 ## Fields in the User model
 
-Oauth51 login mechanism relies on some fields that should be present in the user model. You can generate a migration with this content:
+Orbita login mechanism relies on some fields that should be present in the user model. You can generate a migration with this content:
 
 ```ruby
 # rails g migration add_fields_to_users
@@ -44,7 +44,7 @@ development:
   oauth:
     client_id: OAUTH_CLIENT_ID
     client_secret: OAUTH_CLIENT_SECRET
-    app_url: BASE_URL_OF_OAUTH51_SERVER # like https://users.screenweek.it
+    app_url: BASE_URL_OF_ORBITA_SERVER # like http://connect.getorbita.io
 ```
 
 Then you can go and edit `config/initializers/devise.rb`, adding at the bottom:
@@ -52,7 +52,7 @@ Then you can go and edit `config/initializers/devise.rb`, adding at the bottom:
 ```ruby
 Devise.setup do |config|
   # cut
-  config.omniauth :oauth51, Rails.application.secrets.oauth['client_id'], Rails.application.secrets.oauth['client_secret'], scope: 'public accounts points', client_options: {site: Rails.application.secrets.oauth['app_url']}
+  config.omniauth :orbita, Rails.application.secrets.oauth['client_id'], Rails.application.secrets.oauth['client_secret'], scope: 'public accounts points', client_options: {site: Rails.application.secrets.oauth['app_url']}
 end
 ```
 
@@ -67,7 +67,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # This action will be called when returing from authentication process.
   # request.env['omniauth.auth'] will hold all informations.
   # Let's handle login process as a class method in User model
-  def oauth51
+  def orbita
     @user = User.from_omniauth(request.env["omniauth.auth"])
 
     if @user.persisted? # The user has been succesfully saved
@@ -139,7 +139,7 @@ Edit your `application_controller.rb` and add
 
 ```ruby
   def after_sign_out_path_for(resource)
-    # Here we redirect the user to the logout path of oauth51, which will logout the user
+    # Here we redirect the user to the logout path of orbita, which will logout the user
     # And redirect back here
     target_path = request.referrer || root_path
     "#{Rails.application.secrets.oauth['app_url']}/users/sign_out?return_to=#{target_path}"

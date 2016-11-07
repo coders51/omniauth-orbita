@@ -4,7 +4,7 @@ module OmniAuth
   module Strategies
     class Orbita < OmniAuth::Strategies::OAuth2
       option :name, :orbita
-
+      option :authorize_params, { locale: "en"}
       option :client_options, {
         site: 'http://connect.getorbita.io',
         authorize_url: '/oauth/authorize'
@@ -18,6 +18,10 @@ module OmniAuth
             params[:scope] = request.params[:scope]
           end
         end
+      end
+
+      def setup_phase
+        request.env['omniauth.strategy'].options[:authorize_params][:locale] = request.params["locale"]
       end
 
       info do

@@ -7,8 +7,8 @@ Alongside with this gem, you should use also [oauth51-client](https://github.com
 For the login process, add this gem to your `Gemfile`:
 
 ```ruby
-gem 'omniauth-orbita', github: 'coders51/omniauth-orbita.git'
-gem 'oauth51-client', github: 'coders51/oauth51-client.git'
+gem 'omniauth-orbita', github: 'coders51/omniauth-orbita'
+gem 'oauth51-client', github: 'coders51/oauth51-client'
 ```
 
 Then you should simply follow the [Oauth instruction for devise](https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview) with some additions. Let's see the whole process:

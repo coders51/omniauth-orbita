@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'bundler', '~> 1.0'
 
-  gem.authors       = ['Michele Carrì']
+  gem.authors       = ['Michele Carri']
   gem.email         = ['mk@coders51.com']
   gem.description   = 'An OmniAuth strategy for Orbita Server.'
   gem.summary       = gem.description
